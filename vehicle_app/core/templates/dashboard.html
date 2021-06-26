@@ -1,0 +1,148 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container p-2 " >
+  <div class="row p-2  ">
+
+    <div class="col">
+      <div class="row">
+        <div style="float: left; width: fit-content" class="mb-3">
+          <select id="disabledSelect" class="form-select">
+            <option>Desde o início</option>
+            <option>Último mês</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 g-2">
+        <div class="col">
+          <div class="card text-center text-white bg-dark">
+          <div class="card-header">Total compras</div>
+            <div class="card-body text-center">
+              <h5 class="card-title">R$ 57.870.00</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card text-center text-white bg-dark">
+          <div class="card-header">Total vendas</div>
+            <div class="card-body text-center">
+              <h5 class="card-title">R$ 57.870.00</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card text-center text-white bg-dark">
+          <div class="card-header">Lucro/Prejuízo</div>
+            <div class="card-body text-center">
+              <h5 class="card-title">R$ 57.870.00</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card text-center text-white bg-dark">
+          <div class="card-header">Comissões</div>
+            <div class="card-body text-center">
+              <h5 class="card-title">R$ 57.870.00</h5>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  </div>
+
+    <div class="col">
+      <h3 class="lead">Últimas vendas:</h3>
+      <hr>
+
+      <table class="table bg-dark text-white">
+        <thead>
+          <tr>
+            <th scope="col">Veículo</th>
+            <th scope="col">Pago</th>
+            <th scope="col">Vendido</th>
+            <th scope="col">Lucro/Prejuízo</th>
+            <th scope="col">Vendedor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>@fat</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
+          </tr>
+
+          <tr>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+<h3 class="lead">Top vendedores:</h3>
+<table class="table bg-dark text-white">
+        <thead>
+          <tr>
+            <th scope="col">Vendedor</th>
+            <th scope="col">Total em vendas</th>
+            <th scope="col">Total comissões</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+
+          <tr>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+</div>
+
+{% endblock %}
+
+

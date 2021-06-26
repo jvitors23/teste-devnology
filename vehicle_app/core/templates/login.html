@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="container p-5">
+
+    <h1 class="text-center" style="display: block">Login</h1>
+
+    <div class="d-flex justify-content-center">
+     <form style="width: fit-content" class="b" method="POST" action="/login">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Usuário</label>
+            <input name="username" type="text" class="form-control"
+                   id="exampleInputEmail1" >
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Senha</label>
+            <input type="password" class="form-control" name="password"
+                   id="exampleInputPassword1">
+              <div id="emailHelp" class="form-text">Nunca compartilhe sua
+                  senha com ninguém!
+              </div>
+
+          </div>
+          <button type="submit" class="btn btn-dark">Login</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
