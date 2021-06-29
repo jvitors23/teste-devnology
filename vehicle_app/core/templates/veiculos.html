@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,6 @@
           rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 </head>
 <body class="bg-light">
@@ -72,22 +70,28 @@
               <td>{{vehicle.cor}}</td>
               <td>{{vehicle.chassi}}</td>
               <td>{{vehicle.valor_compra}}</td>
-              <td>{{vehicle.data_compra}}</td>
+              <td>{{vehicle.data_compra|date:"d/m/Y" }}</td>
               <td>
 
-                <button class="btn btn-sm"><i
+                <button onclick="updateModal({{vehicle.id}})" type="button"
+                        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop" class="btn btn-sm edit_btn"><i
                               class="fas fa-edit text-info"></i></button>
               </td>
               <td>
-                  <button
-                          class="btn btn-sm delete_btn"><i
+                  <button onclick="deleteVehicle({{vehicle.id}})"
+                          class="btn btn-sm"><i
                                          class="fas fa-trash-alt text-danger"></i></button>
                   </td>
               <td>
-                <form method="POST" action="/vendas">
-                  <input type="submit" class="btn btn-sm btn-success"
-                         value="Vender"/>
-                </form>
+
+                  <button onclick="openModalVenda({{vehicle.id}})"
+                          type="button"
+                        data-bs-toggle="modal"
+        data-bs-target="#modalVenda" class="btn btn-sm btn-success">Vender
+                  </button>
+
+
               </td>
             </tr>
         {% endfor %}
@@ -96,8 +100,9 @@
       </tbody>
     </table>
 
-<!-- Button trigger modal -->
+
 <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+        onclick="resetForm()"
         data-bs-target="#staticBackdrop">
   <i class="fas fa-plus-circle"></i> Cadastrar compra de veículo
 </button>
@@ -107,11 +112,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Cadastrar compra de veículo</h5>
+        <h5 class="modal-title modal-veiculo"
+            id="staticBackdropLabel">Cadastrar compra de veículo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="reg_vehicle">
+          <form id="form-modal">
           <div class="row">
               <div class="col">
                   <div class="mb-3">
@@ -152,7 +158,7 @@
               </div>
           </div>
 
-        <div class="row">
+            <div class="row">
               <div class="col">
                   <div class="mb-3">
                     <label for="placa" class="form-label">Placa</label>
@@ -275,7 +281,8 @@
 
               </div>
           </div>
-              <button style="float: right" type="submit"
+              <button style="float: right" id="modal-btn"
+                      onclick="createVehicle()" type="submit"
                       class="btn btn-primary">Cadastrar
               </button>
         </form>
@@ -284,7 +291,62 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalVenda" data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title modal-veiculo"
+            >Vender veículo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <ul>
+              <li>Modelo: <span id="modelo-venda"></span></li>
+              <li>Marca: <span id="marca-venda"></span></li>
+              <li>Ano: <span id="ano-venda"></span></li>
+              <li>Cor: <span id="cor-venda"></span></li>
+              <li>Placa: <span id="placa-venda"></span></li>
+              <li>Valor compra: <span id="valor_compra-venda"></span></li>
+          </ul>
+
+          <form id="form-modal-venda">
+          <div class="row">
+              <div class="col">
+                  <div class="mb-3">
+                    <label for="valor_venda" class="form-label">Valor
+                        da venda</label>
+                    <input required type="number" class="form-control"
+                           id="valor_venda"
+                            name="valor_venda"
+                           aria-describedby="emailHelp">
+                  </div>
+              </div>
+              <div class="col">
+                <div class="mb-3">
+                    <label for="data_venda" class="form-label">Data
+                        venda</label>
+                    <input required type="date" class="form-control"
+                           id="data_venda"
+                            name="data_venda"
+                           aria-describedby="emailHelp">
+                  </div>
+
+              </div>
+          </div>
+
+
+          <button style="float: right" id="modal-venda-btn"
+                  onclick="sellVehicle()" type="submit"
+                  class="btn btn-primary">Vender
+          </button>
+        </form>
+      </div>
+
     </div>
+  </div>
+</div>
 
 </div>
 
@@ -294,7 +356,6 @@
 <!-- Data tables tooltips -->
 <script type="text/javascript"
         src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
 <script crossorigin="anonymous"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -303,64 +364,155 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <script>
 
-    $(document).ready(function() {
-      $('#reg_vehicle').on('submit', function(e){
+    modal_mode = 'create'
+    update_id_vehicle = ''
 
-        e.preventDefault();
-        modelo = document.getElementById('modelo')
-        marca = document.getElementById('marca')
-        cor = document.getElementById('cor')
-        placa = document.getElementById('placa')
-        chassi = document.getElementById('modelo')
-        valor_compra = document.getElementById('valor_compra')
-        data_compra = document.getElementById('data_compra')
-        ano_fabricacao = document.getElementById('ano_fabricacao')
-        data = {
-            modelo: modelo.value,
-            marca: marca.value,
-            cor: cor.value,
-            placa: placa.value,
-            valor_compra: valor_compra.value,
-            chassi: chassi.value,
-            ano_fabricacao: ano_fabricacao.value,
-            data_compra: data_compra.value,
-        }
-        $.ajax({
-          type: "POST",
-          url: '/api/veiculos/',
-          data: data,
-          success: function(response){
-            document.location.reload(true);
-        },
-        error: function (response){
-          alert('Erro ao cadastrar compra de veículo!')
-        },
-          dataType: 'json'
-        });
+    $(document).ready(function() {
+      $('#form-modal').on('submit', function(e){
+
+          e.preventDefault();
+           data = {
+                modelo: document.getElementById('modelo').value,
+                marca: document.getElementById('marca').value,
+                cor: document.getElementById('cor').value,
+                placa: document.getElementById('placa').value,
+                valor_compra: document.getElementById('valor_compra').value,
+                chassi: document.getElementById('chassi').value,
+                ano_fabricacao: document.getElementById('ano_fabricacao').value,
+                data_compra: document.getElementById('data_compra').value,
+            }
+            if(modal_mode == 'create'){
+                $.ajax({
+                    type: "POST",
+                    url: '/api/veiculos/',
+                    data: data,
+                    success: function (response) {
+                        document.location.reload(true);
+                    },
+                    error: function (response) {
+                        alert('Erro ao cadastrar compra de veículo!')
+                    },
+                    dataType: 'json'
+                });
+            }else{
+                $.ajax({
+                    type: "PUT",
+                    url: '/api/veiculos/'+update_id_vehicle+'/',
+                    data: data,
+                    success: function (response) {
+                        document.location.reload(true);
+                    },
+                    error: function (response) {
+                        alert('Erro ao editar compra de veículo!')
+                    },
+                    dataType: 'json'
+                });
+            }
+
       });
 
-      $('.delete_btn').on('click', function(e){
-          var id_vehicle =
-              e.target.parentElement.parentElement.parentElement.id
+      $('#form-modal-venda').on('submit', function(e){
+
+          e.preventDefault();
+           data = {
+                valor_venda: document.getElementById('valor_venda').value,
+                data_venda: document.getElementById('data_venda').value,
+            }
+
+            $.ajax({
+                type: "PATCH",
+                url: '/api/veiculos/'+update_id_vehicle+'/',
+                data: data,
+                success: function (response) {
+                    document.location.reload(true);
+                },
+                error: function (response) {
+                    alert('Erro ao vender veículo!')
+                },
+                dataType: 'json'
+            });
+
+      });
+
+    });
+
+
+    function deleteVehicle(id_vehicle){
           $.ajax({
               type: "DELETE",
               url: '/api/veiculos/'+id_vehicle,
               success: function(response){
                 document.location.reload(true);
               },
-
               dataType: 'json'
           });
-      });
+    }
 
-    });
+    function updateModal(id_vehicle){
+        modal_mode = 'update'
+        update_id_vehicle = id_vehicle
+        modal_title = document.getElementsByClassName('modal-veiculo')[0]
+        modal_title.textContent = 'Editar veículo'
+        modal_btn = document.getElementById('modal-btn')
+        modal_btn.textContent = 'Editar'
+        modal_btn.onclick ='updateVehicle()'
 
-    // function deleteVehicle(){
-    //
+          $.ajax({
+              type: "GET",
+              url: '/api/veiculos/'+id_vehicle,
+              success: function(response){
+                document.getElementById('modelo').value = response.modelo
+                document.getElementById('marca').value = response.marca
+                document.getElementById('cor').value = response.cor
+                document.getElementById('placa').value = response.placa
+                document.getElementById('chassi').value = response.chassi
+                document.getElementById('valor_compra').value = response.valor_compra
+                document.getElementById('data_compra').value = response.data_compra
+                document.getElementById('ano_fabricacao').value = response.ano_fabricacao
 
-    //
-    // }
+              },
+              dataType: 'json'
+          });
+    }
 
+    function openModalVenda(id_vehicle){
+        update_id_vehicle = id_vehicle
+        $.ajax({
+              type: "GET",
+              url: '/api/veiculos/'+id_vehicle,
+              success: function(response){
+                document.getElementById('modelo-venda').textContent = response.modelo
+                document.getElementById('marca-venda').textContent = response.marca
+                document.getElementById('cor-venda').textContent = response.cor
+                document.getElementById('placa-venda').textContent =
+                    response.placa
+                document.getElementById('valor_compra-venda').textContent =
+                    response.valor_compra
+
+                document.getElementById('ano-venda').textContent =
+                    response.ano_fabricacao
+              },
+              dataType: 'json'
+          });
+
+
+    }
+
+    function resetForm(){
+        modal_title = document.getElementsByClassName('modal-veiculo')[0]
+        modal_title.textContent = 'Cadastrar compra de veículo'
+        modal_btn = document.getElementById('modal-btn')
+        modal_btn.textContent = 'Cadastrar'
+        modal_btn.onclick ='createVehicle()'
+        document.getElementById('modelo').value = ''
+        document.getElementById('marca').value = ''
+        document.getElementById('cor').value = ''
+        document.getElementById('placa').value = ''
+        document.getElementById('chassi').value = ''
+        document.getElementById('valor_compra').value = ''
+        document.getElementById('data_compra').value = ''
+        document.getElementById('ano_fabricacao').value = ''
+    }
 
 
 $(document).ready(function () {

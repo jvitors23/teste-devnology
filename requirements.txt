@@ -4,3 +4,6 @@ psycopg2-binary
 flake8==3.9.0
 Pillow>=5.3.0<5.4.0
 python-dotenv
+django-heroku
+gunicorn
+django-cors-headers
