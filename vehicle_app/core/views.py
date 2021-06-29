@@ -7,3 +7,7 @@ def home(request):
 
 def veiculos(request):
     return render(request, 'veiculos.html')
+
+
+def vendas(request):
+    return render(request, 'vendas.html')
