@@ -99,6 +99,8 @@
         <thead>
           <tr>
             <th scope="col">Veículo</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Ano</th>
             <th scope="col">Valor de compra</th>
             <th scope="col">Valor de venda</th>
             <th scope="col">Lucro/Prejuízo</th>
@@ -106,42 +108,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
-
-          <tr>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
-          <tr>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
+         {% for vehicle in ultimas_vendas %}
+               <tr>
+                  <td>{{vehicle.modelo}}</td>
+                  <td>{{vehicle.marca}}</td>
+                  <td>{{vehicle.ano_fabricacao}}</td>
+                  <td>{{vehicle.valor_compra}}</td>
+                  <td>{{vehicle.valor_venda }}</td>
+                  <td>{{vehicle.lucro_prejuizo}}</td>
+                  <td>{{vehicle.comissao}}</td>
+               </tr>
+               {% endfor %}
         </tbody>
       </table>
     </div>

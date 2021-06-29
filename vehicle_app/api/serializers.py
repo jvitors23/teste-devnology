@@ -16,8 +16,8 @@ class VehicleSerializer(serializers.ModelSerializer):
     valor_compra = serializers.DecimalField(max_digits=8, decimal_places=2)
     valor_venda = serializers.DecimalField(max_digits=8, decimal_places=2,
                                            required=False)
-    data_compra = serializers.DateField()
-    data_venda = serializers.DateField(required=False)
+    data_compra = serializers.DateField(format="%d/%m/%Y")
+    data_venda = serializers.DateField(format="%d/%m/%Y", required=False)
 
     class Meta:
         model = Vehicle
