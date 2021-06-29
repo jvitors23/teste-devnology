@@ -1,1 +1,1 @@
-web: cd src && gunicorn app.wsgi --log-file -
+web: cd vehicle_app && gunicorn app.wsgi --log-file -
