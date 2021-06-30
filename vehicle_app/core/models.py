@@ -8,7 +8,7 @@ def max_value_current_year(value):
 
 
 def year_choices():
-    return [(r, r) for r in range(1984, datetime.date.today().year+1)]
+    return [(r, r) for r in range(1940, datetime.date.today().year+1)]
 
 
 class Vehicle(models.Model):

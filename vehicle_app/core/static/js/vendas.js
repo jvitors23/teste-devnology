@@ -1,114 +1,6 @@
-modal_mode = 'create'
-update_id_vehicle = ''
-
-$(document).ready(function() {
-    $('#form-modal').on('submit', function(e){
-
-        e.preventDefault();
-        data = {
-            modelo: document.getElementById('modelo').value,
-            marca: document.getElementById('marca').value,
-            cor: document.getElementById('cor').value,
-            placa: document.getElementById('placa').value,
-            valor_compra: document.getElementById('valor_compra').value,
-            chassi: document.getElementById('chassi').value,
-            ano_fabricacao: document.getElementById('ano_fabricacao').value,
-            data_compra: document.getElementById('data_compra').value,
-        }
-        if(modal_mode == 'create'){
-            $.ajax({
-                type: "POST",
-                url: '/api/veiculos/',
-                data: data,
-                success: function (response) {
-                    document.location.reload(true);
-                },
-                error: function (response) {
-                    alert('Erro ao cadastrar compra de veículo!')
-                },
-                dataType: 'json'
-            });
-        }else{
-            $.ajax({
-                type: "PUT",
-                url: '/api/veiculos/'+update_id_vehicle+'/',
-                data: data,
-                success: function (response) {
-                    document.location.reload(true);
-                },
-                error: function (response) {
-                    alert('Erro ao editar compra de veículo!')
-                },
-                dataType: 'json'
-            });
-        }
-    });
-
-    $('#form-modal-venda').on('submit', function(e){
-
-        e.preventDefault();
-        data = {
-            valor_venda: document.getElementById('valor_venda').value,
-            data_venda: document.getElementById('data_venda').value,
-        }
-
-        $.ajax({
-            type: "PATCH",
-            url: '/api/veiculos/'+update_id_vehicle+'/',
-            data: data,
-            success: function (response) {
-                document.location.reload(true);
-            },
-            error: function (response) {
-                alert('Erro ao vender veículo!')
-            },
-            dataType: 'json'
-        });
-
-    });
-
-});
 
 
-function deleteVehicle(id_vehicle){
-      $.ajax({
-          type: "DELETE",
-          url: '/api/veiculos/'+id_vehicle,
-          success: function(response){
-            document.location.reload(true);
-          },
-          dataType: 'json'
-      });
-}
-
-function updateModal(id_vehicle){
-    modal_mode = 'update'
-    update_id_vehicle = id_vehicle
-    modal_title = document.getElementsByClassName('modal-veiculo')[0]
-    modal_title.textContent = 'Editar veículo'
-    modal_btn = document.getElementById('modal-btn')
-    modal_btn.textContent = 'Editar'
-    modal_btn.onclick ='updateVehicle()'
-
-    $.ajax({
-        type: "GET",
-        url: '/api/veiculos/'+id_vehicle,
-        success: function(response){
-            document.getElementById('modelo').value = response.modelo
-            document.getElementById('marca').value = response.marca
-            document.getElementById('cor').value = response.cor
-            document.getElementById('placa').value = response.placa
-            document.getElementById('chassi').value = response.chassi
-            document.getElementById('valor_compra').value = response.valor_compra
-            document.getElementById('data_compra').value = response.data_compra
-            document.getElementById('ano_fabricacao').value = response.ano_fabricacao
-        },
-        dataType: 'json'
-    });
-}
-
-function openModalVenda(id_vehicle){
-    update_id_vehicle = id_vehicle
+function sellDetails(id_vehicle){
     $.ajax({
         type: "GET",
         url: '/api/veiculos/'+id_vehicle,
@@ -123,27 +15,108 @@ function openModalVenda(id_vehicle){
 
             document.getElementById('ano-venda').textContent =
                 response.ano_fabricacao
+
+            document.getElementById('chassi-venda').textContent =
+                response.chassi
+
+            document.getElementById('data_compra-venda').textContent =
+                response.data_compra
+
+            document.getElementById('data_compra-venda').textContent =
+                response.data_compra
+
+            document.getElementById('valor_venda-venda').textContent =
+                response.valor_venda
+
+            document.getElementById('lucro_prejuizo-venda').textContent =
+                (response.valor_venda - response.valor_compra).toFixed(2)
+
+            document.getElementById('comissao-venda').textContent =
+                (response.valor_venda*0.1).toFixed(2)
         },
         dataType: 'json'
     });
 }
 
-function resetForm(){
-    modal_title = document.getElementsByClassName('modal-veiculo')[0]
-    modal_title.textContent = 'Cadastrar compra de veículo'
-    modal_btn = document.getElementById('modal-btn')
-    modal_btn.textContent = 'Cadastrar'
-    modal_btn.onclick ='createVehicle()'
-    document.getElementById('modelo').value = ''
-    document.getElementById('marca').value = ''
-    document.getElementById('cor').value = ''
-    document.getElementById('placa').value = ''
-    document.getElementById('chassi').value = ''
-    document.getElementById('valor_compra').value = ''
-    document.getElementById('data_compra').value = ''
-    document.getElementById('ano_fabricacao').value = ''
+function cancelSell(id_vehicle){
+        data = {
+            valor_venda: null,
+            data_venda: null,
+        }
+
+        $.ajax({
+            type: "PATCH",
+            url: '/api/veiculos/'+id_vehicle+'/',
+            data: data,
+            success: function (response) {
+                console.log(response.status)
+                document.location.reload(true);
+
+            },
+            error: function (response) {
+                alert('Erro ao cancelar venda de veículo!')
+            },
+            dataType: 'json'
+        });
 }
 
+$(document).ready(function() {
+    $('#form-modal').on('submit', function(e){
+
+        e.preventDefault();
+        data = {
+            modelo: document.getElementById('modelo').value,
+            marca: document.getElementById('marca').value,
+            cor: document.getElementById('cor').value,
+            placa: document.getElementById('placa').value,
+            valor_compra: document.getElementById('valor_compra').value,
+            valor_venda: document.getElementById('valor_venda').value,
+            chassi: document.getElementById('chassi').value,
+            ano_fabricacao: document.getElementById('ano_fabricacao').value,
+            data_compra: document.getElementById('data_compra').value,
+            data_venda: document.getElementById('data_venda').value,
+        }
+
+        $.ajax({
+            type: "PUT",
+            url: '/api/veiculos/'+update_id_vehicle+'/',
+            data: data,
+            success: function (response) {
+                document.location.reload(true);
+            },
+            error: function (response) {
+                alert('Erro ao editar venda de veículo!')
+            },
+            dataType: 'json'
+        });
+    });
+});
+
+
+function updateModal(id_vehicle){
+    update_id_vehicle = id_vehicle
+    modal_btn = document.getElementById('modal-btn')
+
+    $.ajax({
+        type: "GET",
+        url: '/api/veiculos/'+id_vehicle,
+        success: function(response){
+            document.getElementById('modelo').value = response.modelo
+            document.getElementById('marca').value = response.marca
+            document.getElementById('cor').value = response.cor
+            document.getElementById('placa').value = response.placa
+            document.getElementById('chassi').value = response.chassi
+            document.getElementById('valor_compra').value = response.valor_compra
+            document.getElementById('valor_venda').value = response.valor_venda
+            dt_compra = response.data_compra.split('/')[2]+'-'+response.data_compra.split('/')[1]+'-'+response.data_compra.split('/')[0]
+            dt_venda = response.data_venda.split('/')[2]+'-'+response.data_venda.split('/')[1]+'-'+response.data_venda.split('/')[0]
+            document.getElementById('data_compra').value = dt_compra
+            document.getElementById('data_venda').value = dt_venda
+            document.getElementById('ano_fabricacao').value = response.ano_fabricacao
+        },
+        dataType: 'json'
+    });
+}
 
 $(document).ready(function () {
     $('#dtHorizontalVerticalExample').DataTable({

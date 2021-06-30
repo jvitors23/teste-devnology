@@ -100,7 +100,8 @@ function updateModal(id_vehicle){
             document.getElementById('placa').value = response.placa
             document.getElementById('chassi').value = response.chassi
             document.getElementById('valor_compra').value = response.valor_compra
-            document.getElementById('data_compra').value = response.data_compra
+            dt_compra = response.data_compra.split('/')[2]+'-'+response.data_compra.split('/')[1]+'-'+response.data_compra.split('/')[0]
+            document.getElementById('data_compra').value = dt_compra
             document.getElementById('ano_fabricacao').value = response.ano_fabricacao
         },
         dataType: 'json'

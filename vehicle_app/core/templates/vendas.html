@@ -3,6 +3,7 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <title>Veículos</title>
       <link crossorigin="anonymous"
          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -67,36 +68,35 @@
                   <td>{{vehicle.valor_venda}}</td>
                   <td>{{vehicle.data_venda }}</td>
                   <td>{{vehicle.lucro_prejuizo}}</td>
-
                   <td>
-                     <button onclick="detailModal({{vehicle.id}})"
-                             type="button"
+                     <button onclick="updateModal({{vehicle.id}})"
+                        type="button"
                         data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop" class="btn btn-sm edit_btn"><i
                         class="fas fa-edit text-info"></i></button>
                   </td>
                   <td>
-                     <button onclick="showSellDetails({{vehicle.id}})"
+                     <button data-bs-toggle="modal"
+                        data-bs-target="#modalVenda" onclick="sellDetails({{vehicle.id}})"
                         class="btn btn-sm"><i
-                             class="fas fa-info-circle text-warning"></i></button>
+                        class="fas fa-info-circle text-warning"></i></button>
                   </td>
                   <td>
-                     <button type="button" onclick="cancelSell()"
-                             class="btn btn-sm btn-danger">Cancelar venda
+                     <button type="button" onclick="cancelSell({{vehicle.id}})"
+                        class="btn btn-sm btn-danger">Cancelar venda
                      </button>
                   </td>
                </tr>
                {% endfor %}
             </tbody>
          </table>
-
          <!-- Modal -->
          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                <div class="modal-content">
                   <div class="modal-header">
                      <h5 class="modal-title modal-veiculo"
-                        id="staticBackdropLabel">Cadastrar compra de veículo</h5>
+                        id="staticBackdropLabel">Editar venda de veículo</h5>
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -151,88 +151,9 @@
                                  <label for="ano_fabricacao" class="form-label ">Ano</label>
                                  <select required class="form-select" id="ano_fabricacao"
                                     name="ano_fabricacao">
-                                    <option value="1940">1940</option>
-                                    <option value="1941">1941</option>
-                                    <option value="1942">1942</option>
-                                    <option value="1943">1943</option>
-                                    <option value="1944">1944</option>
-                                    <option value="1945">1945</option>
-                                    <option value="1946">1946</option>
-                                    <option value="1947">1947</option>
-                                    <option value="1948">1948</option>
-                                    <option value="1949">1949</option>
-                                    <option value="1950">1950</option>
-                                    <option value="1951">1951</option>
-                                    <option value="1952">1952</option>
-                                    <option value="1953">1953</option>
-                                    <option value="1954">1954</option>
-                                    <option value="1955">1955</option>
-                                    <option value="1956">1956</option>
-                                    <option value="1957">1957</option>
-                                    <option value="1958">1958</option>
-                                    <option value="1959">1959</option>
-                                    <option value="1960">1960</option>
-                                    <option value="1961">1961</option>
-                                    <option value="1962">1962</option>
-                                    <option value="1963">1963</option>
-                                    <option value="1964">1964</option>
-                                    <option value="1965">1965</option>
-                                    <option value="1966">1966</option>
-                                    <option value="1967">1967</option>
-                                    <option value="1968">1968</option>
-                                    <option value="1969">1969</option>
-                                    <option value="1970">1970</option>
-                                    <option value="1971">1971</option>
-                                    <option value="1972">1972</option>
-                                    <option value="1973">1973</option>
-                                    <option value="1974">1974</option>
-                                    <option value="1975">1975</option>
-                                    <option value="1976">1976</option>
-                                    <option value="1977">1977</option>
-                                    <option value="1978">1978</option>
-                                    <option value="1979">1979</option>
-                                    <option value="1980">1980</option>
-                                    <option value="1981">1981</option>
-                                    <option value="1982">1982</option>
-                                    <option value="1983">1983</option>
-                                    <option value="1984">1984</option>
-                                    <option value="1985">1985</option>
-                                    <option value="1986">1986</option>
-                                    <option value="1987">1987</option>
-                                    <option value="1988">1988</option>
-                                    <option value="1989">1989</option>
-                                    <option value="1990">1990</option>
-                                    <option value="1991">1991</option>
-                                    <option value="1992">1992</option>
-                                    <option value="1993">1993</option>
-                                    <option value="1994">1994</option>
-                                    <option value="1995">1995</option>
-                                    <option value="1996">1996</option>
-                                    <option value="1997">1997</option>
-                                    <option value="1998">1998</option>
-                                    <option value="1999">1999</option>
-                                    <option value="2000">2000</option>
-                                    <option value="2001">2001</option>
-                                    <option value="2002">2002</option>
-                                    <option value="2003">2003</option>
-                                    <option value="2004">2004</option>
-                                    <option value="2005">2005</option>
-                                    <option value="2006">2006</option>
-                                    <option value="2007">2007</option>
-                                    <option value="2008">2008</option>
-                                    <option value="2009">2009</option>
-                                    <option value="2010">2010</option>
-                                    <option value="2011">2011</option>
-                                    <option value="2012">2012</option>
-                                    <option value="2013">2013</option>
-                                    <option value="2014">2014</option>
-                                    <option value="2015">2015</option>
-                                    <option value="2016">2016</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2018">2018</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
+                                    {% for year in year_options %}
+                                       <option value="{{year}}">{{year}}</option>
+                                    {% endfor %}
                                  </select>
                               </div>
                            </div>
@@ -258,9 +179,33 @@
                               </div>
                            </div>
                         </div>
+                        <div class="row">
+                           <div class="col">
+                              <div class="mb-3">
+                                 <label for="valor_venda"
+                                    class="form-label">Valor
+                                 compra</label>
+                                 <input required type="number" class="form-control"
+                                    id="valor_venda"
+                                    name="valor_venda"
+                                    aria-describedby="emailHelp">
+                              </div>
+                           </div>
+                           <div class="col">
+                              <div class="mb-3">
+                                 <label for="data_venda"
+                                    class="form-label">Data
+                                 compra</label>
+                                 <input required type="date"
+                                    class="form-control" id="data_venda"
+                                    name="data_venda"
+                                    aria-describedby="emailHelp">
+                              </div>
+                           </div>
+                        </div>
                         <button style="float: right" id="modal-btn"
-                           onclick="createVehicle()" type="submit"
-                           class="btn btn-primary">Cadastrar
+                           type="submit"
+                           class="btn btn-primary">Editar
                         </button>
                      </form>
                   </div>
@@ -273,7 +218,7 @@
                <div class="modal-content">
                   <div class="modal-header">
                      <h5 class="modal-title modal-veiculo"
-                        >Vender veículo</h5>
+                        >Detalhes da venda</h5>
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -283,36 +228,24 @@
                         <li>Ano: <span id="ano-venda"></span></li>
                         <li>Cor: <span id="cor-venda"></span></li>
                         <li>Placa: <span id="placa-venda"></span></li>
+                        <li>Chassi: <span id="chassi-venda"></span></li>
+                        <li>Data compra:
+                           <span id="data_compra-venda"></span>
+                        </li>
+                        <li>Data venda:
+                           <span id="data_venda-venda"></span>
+                        </li>
                         <li>Valor compra: <span id="valor_compra-venda"></span></li>
+                        <li>Valor venda:
+                           <span id="valor_venda-venda"></span>
+                        </li>
+                        <li>Lucro/Prejuízo:
+                           <span id="lucro_prejuizo-venda"></span>
+                        </li>
+                        <li>Comissão:
+                           <span id="comissao-venda"></span>
+                        </li>
                      </ul>
-                     <form id="form-modal-venda">
-                        <div class="row">
-                           <div class="col">
-                              <div class="mb-3">
-                                 <label for="valor_venda" class="form-label">Valor
-                                 da venda</label>
-                                 <input required type="number" class="form-control"
-                                    id="valor_venda"
-                                    name="valor_venda"
-                                    aria-describedby="emailHelp">
-                              </div>
-                           </div>
-                           <div class="col">
-                              <div class="mb-3">
-                                 <label for="data_venda" class="form-label">Data
-                                 venda</label>
-                                 <input required type="date" class="form-control"
-                                    id="data_venda"
-                                    name="data_venda"
-                                    aria-describedby="emailHelp">
-                              </div>
-                           </div>
-                        </div>
-                        <button style="float: right" id="modal-venda-btn"
-                           onclick="sellVehicle()" type="submit"
-                           class="btn btn-primary">Vender
-                        </button>
-                     </form>
                   </div>
                </div>
             </div>

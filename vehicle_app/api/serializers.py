@@ -15,9 +15,10 @@ class VehicleSerializer(serializers.ModelSerializer):
                                              datetime.date.today().year+1)))
     valor_compra = serializers.DecimalField(max_digits=8, decimal_places=2)
     valor_venda = serializers.DecimalField(max_digits=8, decimal_places=2,
-                                           required=False)
+                                           allow_null=True, required=False)
     data_compra = serializers.DateField(format="%d/%m/%Y")
-    data_venda = serializers.DateField(format="%d/%m/%Y", required=False)
+    data_venda = serializers.DateField(format="%d/%m/%Y", required=False,
+                                       allow_null=True)
 
     class Meta:
         model = Vehicle
@@ -27,6 +28,7 @@ class VehicleSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
     def create(self, validated_data):
+        """Create vehicle objects"""
         validated_data['data_compra'] = validated_data[
             'data_compra'].strftime('%Y-%m-%d')
         validated_data['placa'] = validated_data['placa'].upper()
