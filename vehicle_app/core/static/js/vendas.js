@@ -30,9 +30,13 @@ function sellDetails(id_vehicle){
 
             document.getElementById('lucro_prejuizo-venda').textContent =
                 (response.valor_venda - response.valor_compra).toFixed(2)
-
+            if(response.valor_venda - response.valor_compra > 0) {
+                comissao = 0.1 * (response.valor_venda - response.valor_compra)
+            }else{
+                comissao = 0
+            }
             document.getElementById('comissao-venda').textContent =
-                (response.valor_venda*0.1).toFixed(2)
+                (comissao).toFixed(2)
         },
         dataType: 'json'
     });

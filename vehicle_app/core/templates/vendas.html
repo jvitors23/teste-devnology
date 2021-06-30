@@ -45,13 +45,12 @@
             <thead>
                <tr>
                   <th>Modelo</th>
-                  <th>Marca</th>
-                  <th>Ano</th>
                   <th>Valor compra</th>
                   <th>Data compra</th>
                   <th>Valor Venda</th>
                   <th>Data venda</th>
                   <th>Lucro/Prejuízo</th>
+                  <th>Comissão</th>
                   <th></th>
                   <th></th>
                   <th></th>
@@ -61,13 +60,12 @@
                {% for vehicle in vehicles %}
                <tr>
                   <td>{{vehicle.modelo}}</td>
-                  <td>{{vehicle.marca}}</td>
-                  <td>{{vehicle.ano_fabricacao}}</td>
                   <td>{{vehicle.valor_compra}}</td>
                   <td>{{vehicle.data_compra }}</td>
                   <td>{{vehicle.valor_venda}}</td>
                   <td>{{vehicle.data_venda }}</td>
                   <td>{{vehicle.lucro_prejuizo}}</td>
+                  <td>{{vehicle.comissao}}</td>
                   <td>
                      <button onclick="updateModal({{vehicle.id}})"
                         type="button"
