@@ -38,6 +38,7 @@
          </div>
       </nav>
       <div class="container p-4 " >
+         <h1 class="lead">Veículos disponíveis:</h1>
          <table id="dtHorizontalVerticalExample"
             class="mt-2 table table-striped table-bordered table-sm "
             cellspacing="0"
@@ -58,8 +59,8 @@
                </tr>
             </thead>
             <tbody>
-               {% for vehicle in vehicles %}
-               <tr id="{{vehicle.id}}">
+               {% for vehicle in available_vehicles %}
+               <tr>
                   <td>{{vehicle.modelo}}</td>
                   <td>{{vehicle.marca}}</td>
                   <td>{{vehicle.ano_fabricacao}}</td>
@@ -95,6 +96,7 @@
             data-bs-target="#staticBackdrop">
          <i class="fas fa-plus-circle"></i> Cadastrar compra de veículo
          </button>
+
          <!-- Modal -->
          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">

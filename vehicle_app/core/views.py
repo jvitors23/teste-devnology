@@ -1,51 +1,26 @@
-from django.shortcuts import render
-from django.db.models import Sum
 import datetime
-from datetime import timedelta
 
-from core.models import Vehicle
 from api.serializers import VehicleSerializer
-
+from api.views import get_profits_info
+from core.models import Vehicle
+from django.shortcuts import render
 
 PORCENTAGEM_COMISSAO = 0.1
 
 
-def home(request):
-    last_month = request.GET.get('last_month', 0)
-    last_month_date = datetime.datetime.today() - timedelta(days=30)
-    if int(last_month) == 1:
-        compras = Vehicle.objects.all().filter(
-            data_compra__gte=last_month_date)
-        vendas = Vehicle.objects.all().filter(
-            data_venda__isnull=False).filter(
-            data_venda__gte=last_month_date)
-    else:
-        compras = Vehicle.objects.all()
-        vendas = Vehicle.objects.all().filter(data_venda__isnull=False)
+def dashboard(request):
+    """Render 'Dashboard' page"""
+    last_month = int(request.GET.get('last_month', 0)) == 1
+    profits_info = get_profits_info(last_month)
 
-    total_compras = compras.aggregate(Sum('valor_compra'))[
-        'valor_compra__sum']
-    if total_compras is None:
-        total_compras = 0
-    total_compras = float(total_compras)
-
-    total_vendas = vendas.aggregate(Sum('valor_venda'))[
-        'valor_venda__sum']
-    if total_vendas is None:
-        total_vendas = 0
-    total_vendas = float(total_vendas)
-
-    lucro_prejuizo_total = float(total_vendas - total_compras)
-
-    serializer = VehicleSerializer(vendas, many=True)
-    vendas = serializer.data
-    total_comissoes = 0
-    lucro_prejuizo_venda = 0
-    for vehicle in vendas:
-        lucro_prejuizo_venda += float(vehicle['valor_venda']) - \
-                                 float(vehicle['valor_compra'])
-        if lucro_prejuizo_venda > 0:
-            total_comissoes += lucro_prejuizo_venda * PORCENTAGEM_COMISSAO
+    all_vehicles = Vehicle.objects.all()
+    serializer = VehicleSerializer(all_vehicles, many=True)
+    all_vehicles = serializer.data
+    for vehicle in all_vehicles:
+        if vehicle['data_venda'] is not None:
+            vehicle['status'] = 'Vendido'
+        else:
+            vehicle['status'] = 'Disponível'
 
     ultimas_vendas = Vehicle.objects.all().filter(
         data_venda__isnull=False).order_by('data_venda')
@@ -57,36 +32,32 @@ def home(request):
             float(vehicle['valor_venda']) - float(vehicle['valor_compra']))
         if float(vehicle['lucro_prejuizo']) > 0:
             vehicle['comissao'] = "{:.2f}".format(PORCENTAGEM_COMISSAO * float(
-            vehicle['lucro_prejuizo']))
+                vehicle['lucro_prejuizo']))
         else:
             vehicle['comissao'] = "{:.2f}".format(0)
     if len(ultimas_vendas) > 5:
         ultimas_vendas = ultimas_vendas[0:5]
-    total_compras = "{:.2f}".format(total_compras)
-    total_vendas = "{:.2f}".format(total_vendas)
-    lucro_prejuizo_total = "{:.2f}".format(lucro_prejuizo_total)
-    total_comissoes = "{:.2f}".format(total_comissoes)
-    return render(request, 'dashboard.html', {'ultimas_vendas':
-                                                  ultimas_vendas,
-                                              'total_compras': total_compras,
-                                              'total_vendas': total_vendas,
-                                              'lucro_prejuizo_total':
-                                                  lucro_prejuizo_total,
-                                              'total_comissoes':
-                                                   total_comissoes,
-                                              })
+
+    return_object = profits_info
+    return_object['all_vehicles'] = all_vehicles
+    return_object['ultimas_vendas'] = ultimas_vendas
+    return render(request, 'dashboard.html', return_object)
 
 
 def veiculos(request):
+    """Render 'Veículos' page"""
     year_options = list(range(datetime.date.today().year, 1940, -1))
-    vehicles = Vehicle.objects.all().filter(data_venda__isnull=True)
-    serializer = VehicleSerializer(vehicles, many=True)
-    vehicles = serializer.data
-    return render(request, 'veiculos.html', {'vehicles': vehicles,
-                                             'year_options': year_options})
+    available_vehicles = Vehicle.objects.all().filter(data_venda__isnull=True)
+    serializer = VehicleSerializer(available_vehicles, many=True)
+    available_vehicles = serializer.data
+
+    return render(request, 'veiculos.html', {
+        'available_vehicles': available_vehicles,
+        'year_options': year_options})
 
 
 def vendas(request):
+    """Render 'Vendas' page"""
     year_options = list(range(datetime.date.today().year, 1940, -1))
     vehicles = Vehicle.objects.all().filter(data_venda__isnull=False)
     serializer = VehicleSerializer(vehicles, many=True)

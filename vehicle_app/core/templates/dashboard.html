@@ -10,7 +10,7 @@
          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
          rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-      <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
    </head>
    <body class="bg-light">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,30 +39,41 @@
          </div>
       </nav>
       <div class="container p-4 " >
+
+         <div class="row p-2  ">
+
          <div class="col">
             <div class="row">
                <div style="float: left; width: fit-content" class="mb-3">
-                  <select onchange="updateDashboard()" id="disabledSelect"
+                  <select id="time-interval" onchange="updateDashboard()"
+                          id="disabledSelect"
                           class="form-select">
-                     <option>Desde o início</option>
-                     <option>Último mês</option>
+                     <option value="0">Desde o início</option>
+                     <option value="1">Último mês</option>
                   </select>
                </div>
             </div>
+
+
+
             <div class="row row-cols-1 row-cols-md-2 g-2">
+
                <div class="col">
                   <div class="card text-center text-white bg-dark">
                      <div class="card-header">Total compras</div>
                      <div class="card-body text-center py-4">
-                        <h5 class="card-title">R$ {{total_compras}}</h5>
+                        <h5 class="card-title">R$
+                           <span id="total_compras">{{total_compras}}</span></h5>
                      </div>
                   </div>
                </div>
+
                <div class="col">
                   <div class="card text-center text-white bg-dark">
                      <div class="card-header">Total vendas</div>
                      <div class="card-body text-center py-4">
-                        <h5 class="card-title">R$ {{total_vendas}}</h5>
+                        <h5 class="card-title">R$
+                           <span id="total_vendas">{{total_vendas}}</span></h5>
                      </div>
                   </div>
                </div>
@@ -70,7 +81,9 @@
                   <div class="card text-center text-white bg-dark">
                      <div class="card-header">Lucro/Prejuízo</div>
                      <div class="card-body text-center py-4">
-                        <h5 class="card-title">R$ {{lucro_prejuizo_total}}</h5>
+                        <h5 class="card-title">R$
+                           <span id="lucro_prejuizo_total">
+                              {{lucro_prejuizo_total}}</span></h5>
                      </div>
                   </div>
                </div>
@@ -78,20 +91,20 @@
                   <div class="card text-center text-white bg-dark">
                      <div class="card-header">Comissões</div>
                      <div class="card-body text-center py-4">
-                        <h5 class="card-title">R$ {{total_comissoes}}</h5>
+                        <h5 class="card-title">R$
+                           <span id="total_comissoes">
+                              {{total_comissoes}}</span></h5>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-         <div class="col mt-3">
-            <h3 class="lead">Últimas vendas:</h3>
-            <table class="table">
+         <div class="col">
+            <h3 class="lead mt-4">Últimas vendas:</h3>
+            <table class="table text-white bg-dark">
                <thead>
                   <tr>
                      <th scope="col">Veículo</th>
-                     <th scope="col">Marca</th>
-                     <th scope="col">Ano</th>
                      <th scope="col">Valor de compra</th>
                      <th scope="col">Valor de venda</th>
                      <th scope="col">Lucro/Prejuízo</th>
@@ -102,8 +115,6 @@
                   {% for vehicle in ultimas_vendas %}
                   <tr>
                      <td>{{vehicle.modelo}}</td>
-                     <td>{{vehicle.marca}}</td>
-                     <td>{{vehicle.ano_fabricacao}}</td>
                      <td>{{vehicle.valor_compra}}</td>
                      <td>{{vehicle.valor_venda }}</td>
                      <td>{{vehicle.lucro_prejuizo}}</td>
@@ -113,12 +124,55 @@
                </tbody>
             </table>
          </div>
+
+         <h2 class="lead mt-4">Todos os veículos:</h2>
+         <table id="dtHorizontalVerticalExample2"
+                class="mt-2 table table-striped table-bordered table-sm"
+            cellspacing="0"
+            width="100%">
+            <thead>
+               <tr>
+                  <th>Modelo</th>
+                  <th>Marca</th>
+                  <th>Ano</th>
+                  <th>Placa</th>
+                  <th>Cor</th>
+                  <th>Chassi</th>
+                  <th>Valor compra</th>
+                  <th>Data compra</th>
+                  <th>Status</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for vehicle in all_vehicles %}
+               <tr>
+                  <td>{{vehicle.modelo}}</td>
+                  <td>{{vehicle.marca}}</td>
+                  <td>{{vehicle.ano_fabricacao}}</td>
+                  <td>{{vehicle.placa}}</td>
+                  <td>{{vehicle.cor}}</td>
+                  <td>{{vehicle.chassi}}</td>
+                  <td>{{vehicle.valor_compra}}</td>
+                  <td>{{vehicle.data_compra}}</td>
+                  <td>{{vehicle.status}}</td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+
       </div>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <!-- Data tables tooltips -->
+      <script type="text/javascript"
+         src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
       <script crossorigin="anonymous"
          integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
          src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
       <script crossorigin="anonymous"
          integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+         <script src="{% static 'js/dashboard.js' %}"></script>
+
    </body>
 </html>

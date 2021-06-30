@@ -1,6 +1,6 @@
 # Aplicativo de gerenciamento de vendas de veículos
 
->> Teste seleção trainee [Devnology](https://devnology.com.br/)
+Aplicação do teste para seleção de trainee na [Devnology](https://devnology.com.br/)
 
 Demo da aplicação no [Heroku](https://www.heroku.com/):
 

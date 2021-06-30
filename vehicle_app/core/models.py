@@ -1,6 +1,7 @@
-from django.db import models
 import datetime
+
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 
 
 def max_value_current_year(value):
@@ -8,7 +9,7 @@ def max_value_current_year(value):
 
 
 def year_choices():
-    return [(r, r) for r in range(1940, datetime.date.today().year+1)]
+    return [(r, r) for r in range(1940, datetime.date.today().year + 1)]
 
 
 class Vehicle(models.Model):
@@ -24,4 +25,3 @@ class Vehicle(models.Model):
                                       blank=True, null=True)
     data_compra = models.DateField()
     data_venda = models.DateField(blank=True, null=True)
-

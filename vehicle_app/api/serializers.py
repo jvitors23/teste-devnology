@@ -1,6 +1,7 @@
-from rest_framework import serializers
 import datetime
+
 from core.models import Vehicle
+from rest_framework import serializers
 
 
 class VehicleSerializer(serializers.ModelSerializer):
@@ -11,8 +12,8 @@ class VehicleSerializer(serializers.ModelSerializer):
     placa = serializers.CharField(max_length=10)
     cor = serializers.CharField(max_length=255)
     chassi = serializers.CharField(max_length=255)
-    ano_fabricacao = serializers.ChoiceField(choices=list(range(1940,
-                                             datetime.date.today().year+1)))
+    ano_fabricacao = serializers.ChoiceField(choices=list(range(
+        1940, datetime.date.today().year + 1)))
     valor_compra = serializers.DecimalField(max_digits=8, decimal_places=2)
     valor_venda = serializers.DecimalField(max_digits=8, decimal_places=2,
                                            allow_null=True, required=False)
@@ -33,4 +34,3 @@ class VehicleSerializer(serializers.ModelSerializer):
             'data_compra'].strftime('%Y-%m-%d')
         validated_data['placa'] = validated_data['placa'].upper()
         return Vehicle.objects.create(**validated_data)
-
