@@ -13,10 +13,17 @@ def home(request):
     ultimas_vendas = Vehicle.objects.all().filter(
         data_venda__isnull=False).order_by('data_venda')
 
-    total_compras = float(Vehicle.objects.all().aggregate(Sum('valor_compra'))[
-        'valor_compra__sum'])
-    total_vendas = float(Vehicle.objects.all().aggregate(Sum('valor_venda'))[
-        'valor_venda__sum'])
+    total_compras = Vehicle.objects.all().aggregate(Sum('valor_compra'))[
+        'valor_compra__sum']
+    if total_compras is None:
+        total_compras = 0
+    total_compras = float(total_compras)
+
+    total_vendas = Vehicle.objects.all().aggregate(Sum('valor_venda'))[
+        'valor_venda__sum']
+    if total_vendas is None:
+        total_vendas = 0
+    total_vendas = float(total_vendas)
     lucro_prejuizo_total = float(total_vendas - total_compras)
     total_comissoes = total_vendas * PORCENTAGEM_COMISSAO
 
