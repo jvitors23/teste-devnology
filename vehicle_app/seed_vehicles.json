@@ -1,0 +1,322 @@
+[
+  {
+    "model": "core.vehicle",
+    "pk": 2,
+    "fields": {
+      "modelo": "Palio",
+      "marca": "Fiat",
+      "placa": "CLA-9034",
+      "cor": "Preto",
+      "chassi": "231234334213",
+      "ano_fabricacao": 2021,
+      "valor_compra": "20000.00",
+      "valor_venda": "22000.00",
+      "data_compra": "2021-06-28",
+      "data_venda": "2021-06-30"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 26,
+    "fields": {
+      "modelo": "Cobalt",
+      "marca": "Chevrolet",
+      "placa": "CLA-9034",
+      "cor": "Vermelho",
+      "chassi": "2314234",
+      "ano_fabricacao": 2021,
+      "valor_compra": "40000.00",
+      "valor_venda": "45000.00",
+      "data_compra": "2021-04-16",
+      "data_venda": "2021-06-30"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 28,
+    "fields": {
+      "modelo": "Fox",
+      "marca": "WV",
+      "placa": "SDF-5532",
+      "cor": "Prata",
+      "chassi": "231234334213",
+      "ano_fabricacao": 2017,
+      "valor_compra": "24900.00",
+      "valor_venda": "26000.00",
+      "data_compra": "2021-06-30",
+      "data_venda": "2021-07-03"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 29,
+    "fields": {
+      "modelo": "Civic",
+      "marca": "Honda",
+      "placa": "XYZ-1234",
+      "cor": "Preto",
+      "chassi": "234568",
+      "ano_fabricacao": 2019,
+      "valor_compra": "66000.00",
+      "valor_venda": "85000.00",
+      "data_compra": "2021-03-17",
+      "data_venda": "2021-06-28"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 30,
+    "fields": {
+      "modelo": "HB20",
+      "marca": "Hyundai",
+      "placa": "SDF-5534",
+      "cor": "Branco",
+      "chassi": "123658",
+      "ano_fabricacao": 2018,
+      "valor_compra": "23000.00",
+      "valor_venda": "28000.00",
+      "data_compra": "2021-05-12",
+      "data_venda": "2021-06-30"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 31,
+    "fields": {
+      "modelo": "Prisma",
+      "marca": "Chevrolet",
+      "placa": "HLB-7154",
+      "cor": "Vermelho",
+      "chassi": "5648787",
+      "ano_fabricacao": 2020,
+      "valor_compra": "39900.00",
+      "valor_venda": "44000.00",
+      "data_compra": "2021-06-06",
+      "data_venda": "2021-05-15"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 32,
+    "fields": {
+      "modelo": "Gol",
+      "marca": "VW",
+      "placa": "CLA-4579",
+      "cor": "Prata",
+      "chassi": "395435964",
+      "ano_fabricacao": 2015,
+      "valor_compra": "18000.00",
+      "valor_venda": null,
+      "data_compra": "2021-05-14",
+      "data_venda": null
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 33,
+    "fields": {
+      "modelo": "Fiesta",
+      "marca": "Ford",
+      "placa": "DFG-3456",
+      "cor": "Branco",
+      "chassi": "458789787",
+      "ano_fabricacao": 2015,
+      "valor_compra": "21000.00",
+      "valor_venda": null,
+      "data_compra": "2021-06-05",
+      "data_venda": null
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 34,
+    "fields": {
+      "modelo": "Golf",
+      "marca": "VW",
+      "placa": "JOA-1834",
+      "cor": "Preto",
+      "chassi": "1234355654",
+      "ano_fabricacao": 2018,
+      "valor_compra": "30000.00",
+      "valor_venda": "45000.00",
+      "data_compra": "2021-04-26",
+      "data_venda": "2021-06-27"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 35,
+    "fields": {
+      "modelo": "Toro",
+      "marca": "Fiat",
+      "placa": "ERT-2356",
+      "cor": "Preto",
+      "chassi": "12343409456",
+      "ano_fabricacao": 2019,
+      "valor_compra": "55000.00",
+      "valor_venda": "65000.00",
+      "data_compra": "2021-05-08",
+      "data_venda": "2021-05-30"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 36,
+    "fields": {
+      "modelo": "Corolla",
+      "marca": "Toyota",
+      "placa": "ERT-6789",
+      "cor": "Preto",
+      "chassi": "123495346",
+      "ano_fabricacao": 2021,
+      "valor_compra": "87000.00",
+      "valor_venda": "100000.00",
+      "data_compra": "2021-05-02",
+      "data_venda": "2021-07-10"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 37,
+    "fields": {
+      "modelo": "Cruze",
+      "marca": "Chevrolet",
+      "placa": "DFH-5689",
+      "cor": "Branco",
+      "chassi": "12376786",
+      "ano_fabricacao": 2016,
+      "valor_compra": "44000.00",
+      "valor_venda": "55000.00",
+      "data_compra": "2021-04-18",
+      "data_venda": "2021-05-10"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 38,
+    "fields": {
+      "modelo": "Saveiro",
+      "marca": "VW",
+      "placa": "DFK-5680",
+      "cor": "Azul",
+      "chassi": "76886767",
+      "ano_fabricacao": 2019,
+      "valor_compra": "45799.00",
+      "valor_venda": "55000.00",
+      "data_compra": "2021-04-18",
+      "data_venda": "2021-05-21"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 39,
+    "fields": {
+      "modelo": "CG 150",
+      "marca": "Honda",
+      "placa": "DNK-5678",
+      "cor": "Branco",
+      "chassi": "233456575678",
+      "ano_fabricacao": 2018,
+      "valor_compra": "15000.00",
+      "valor_venda": "18000.00",
+      "data_compra": "2021-04-19",
+      "data_venda": "2021-06-27"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 40,
+    "fields": {
+      "modelo": "Uno",
+      "marca": "Fiat",
+      "placa": "UNO-1235",
+      "cor": "Prata",
+      "chassi": "32178978",
+      "ano_fabricacao": 2018,
+      "valor_compra": "24000.00",
+      "valor_venda": "29000.00",
+      "data_compra": "2021-05-12",
+      "data_venda": "2021-06-28"
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 41,
+    "fields": {
+      "modelo": "Palio",
+      "marca": "Fiat",
+      "placa": "DFH-5678",
+      "cor": "Branco",
+      "chassi": "2134303242234",
+      "ano_fabricacao": 2015,
+      "valor_compra": "22000.00",
+      "valor_venda": null,
+      "data_compra": "2021-05-04",
+      "data_venda": null
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 42,
+    "fields": {
+      "modelo": "Fusion",
+      "marca": "Ford",
+      "placa": "LSO-2376",
+      "cor": "Prata",
+      "chassi": "13204534",
+      "ano_fabricacao": 2019,
+      "valor_compra": "47000.00",
+      "valor_venda": null,
+      "data_compra": "2021-06-01",
+      "data_venda": null
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 43,
+    "fields": {
+      "modelo": "Etios",
+      "marca": "Toyota",
+      "placa": "DTR-5496",
+      "cor": "Preto",
+      "chassi": "12304342",
+      "ano_fabricacao": 2020,
+      "valor_compra": "40000.00",
+      "valor_venda": null,
+      "data_compra": "2021-05-08",
+      "data_venda": null
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 44,
+    "fields": {
+      "modelo": "Renegade",
+      "marca": "Jeep",
+      "placa": "DFL-4506",
+      "cor": "Branco",
+      "chassi": "3494534",
+      "ano_fabricacao": 2019,
+      "valor_compra": "48000.00",
+      "valor_venda": null,
+      "data_compra": "2021-05-09",
+      "data_venda": null
+    }
+  },
+  {
+    "model": "core.vehicle",
+    "pk": 45,
+    "fields": {
+      "modelo": "Sandero",
+      "marca": "Renault",
+      "placa": "LSO-4052",
+      "cor": "Preto",
+      "chassi": "23034534",
+      "ano_fabricacao": 2020,
+      "valor_compra": "45000.00",
+      "valor_venda": null,
+      "data_compra": "2021-04-12",
+      "data_venda": null
+    }
+  }
+]

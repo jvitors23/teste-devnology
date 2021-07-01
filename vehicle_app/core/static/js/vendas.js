@@ -129,10 +129,10 @@ $(document).ready(function () {
     "bLengthChange": false,
       "language":
       {
-    "emptyTable": "Não foi encontrado nenhum registo",
+    "emptyTable": "Não foi encontrado nenhum registro",
     "loadingRecords": "A carregar...",
     "processing": "A processar...",
-    "lengthMenu": "Mostrar _MENU_ registos",
+    "lengthMenu": "Mostrar _MENU_ registros",
     "zeroRecords": "Não foram encontrados resultados",
     "search": "Procurar:",
     "paginate": {
@@ -174,7 +174,7 @@ $(document).ready(function () {
         "print": "Imprimir"
     },
     "decimal": ",",
-    "infoFiltered": "(filtrado num total de _MAX_ registos)",
+    "infoFiltered": "(filtrado num total de _MAX_ registros)",
     "infoThousands": ".",
     "searchBuilder": {
         "add": "Adicionar condição",
@@ -289,8 +289,8 @@ $(document).ready(function () {
             "restore": "Desfazer alterações"
         }
     },
-    "info": "Mostrando os registos _START_ a _END_ num total de _TOTAL_",
-    "infoEmpty": "Mostrando 0 os registos num total de 0"
+    "info": "Mostrando os registros _START_ a _END_ num total de _TOTAL_",
+    "infoEmpty": "Mostrando 0 os registros num total de 0"
 }
 
     });

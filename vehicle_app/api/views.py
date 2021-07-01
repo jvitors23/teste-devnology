@@ -19,7 +19,6 @@ class VehicleViewset(viewsets.ModelViewSet):
 
 def get_profits_info(last_month=False):
     last_month_date = datetime.datetime.today() - timedelta(days=30)
-    print(last_month)
 
     if last_month:
         compras = Vehicle.objects.all().filter(

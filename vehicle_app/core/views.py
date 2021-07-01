@@ -23,7 +23,7 @@ def dashboard(request):
             vehicle['status'] = 'Disponível'
 
     ultimas_vendas = Vehicle.objects.all().filter(
-        data_venda__isnull=False).order_by('data_venda')
+        data_venda__isnull=False).order_by('-data_venda')
 
     serializer = VehicleSerializer(ultimas_vendas, many=True)
     ultimas_vendas = serializer.data
