@@ -29,7 +29,7 @@ O docker fará o build de uma imagem personalizada com as dependências necessá
 ```bash
  pip install -r requirements.txt
 ```
-Em seguida é preciso instalar o postgres, criar uma base de dados para a aplicação e configurar as credenciais do banco como variáveis de ambiente no arquivo .env.
+Em seguida, é preciso instalar o postgres, criar uma base de dados para a aplicação e configurar as credenciais do banco como variáveis de ambiente no arquivo .env.
 
 - Rodar migrations, seed do banco e iniciar servidor:
 ```bash
