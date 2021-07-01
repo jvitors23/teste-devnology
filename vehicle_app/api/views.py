@@ -2,6 +2,7 @@ import datetime
 from datetime import timedelta
 
 from api.serializers import VehicleSerializer
+from babel.numbers import format_currency
 from core.models import Vehicle
 from django.db.models import Sum
 from rest_framework import viewsets
@@ -18,7 +19,6 @@ class VehicleViewset(viewsets.ModelViewSet):
 
 
 def get_profits_info(interval='begin'):
-
     if interval == 'month':
         begin_date = datetime.datetime.today() - timedelta(days=30)
     elif interval == 'week':
@@ -62,10 +62,11 @@ def get_profits_info(interval='begin'):
         if lucro_prejuizo_venda > 0:
             total_comissoes += lucro_prejuizo_venda * PORCENTAGEM_COMISSAO
 
-    total_compras = "{:.2f}".format(total_compras)
-    total_vendas = "{:.2f}".format(total_vendas)
-    lucro_prejuizo_total = "{:.2f}".format(lucro_prejuizo_total)
-    total_comissoes = "{:.2f}".format(total_comissoes)
+    total_compras = format_currency(total_compras, 'BRL', locale='pt_BR')
+    total_vendas = format_currency(total_vendas, 'BRL', locale='pt_BR')
+    lucro_prejuizo_total = format_currency(lucro_prejuizo_total, 'BRL',
+                                           locale='pt_BR')
+    total_comissoes = format_currency(total_comissoes, 'BRL', locale='pt_BR')
 
     return {
         'total_compras': total_compras,

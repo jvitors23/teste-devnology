@@ -119,8 +119,10 @@ function openModalVenda(id_vehicle){
             document.getElementById('cor-venda').textContent = response.cor
             document.getElementById('placa-venda').textContent =
                 response.placa
-            document.getElementById('valor_compra-venda').textContent =
-                response.valor_compra
+            document.getElementById('valor_compra-venda').textContent =new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(response.valor_compra)
 
             document.getElementById('ano-venda').textContent =
                 response.ano_fabricacao

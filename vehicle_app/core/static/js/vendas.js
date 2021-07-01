@@ -8,8 +8,11 @@ function sellDetails(id_vehicle){
             document.getElementById('cor-venda').textContent = response.cor
             document.getElementById('placa-venda').textContent =
                 response.placa
-            document.getElementById('valor_compra-venda').textContent =
-                response.valor_compra
+            document.getElementById('valor_compra-venda').textContent = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(response.valor_compra)
+
 
             document.getElementById('ano-venda').textContent =
                 response.ano_fabricacao
@@ -20,21 +23,30 @@ function sellDetails(id_vehicle){
             document.getElementById('data_compra-venda').textContent =
                 response.data_compra
 
-            document.getElementById('data_compra-venda').textContent =
-                response.data_compra
+            document.getElementById('data_venda-venda').textContent =
+                response.data_venda
 
-            document.getElementById('valor_venda-venda').textContent =
-                response.valor_venda
+            document.getElementById('valor_venda-venda').textContent = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(response.valor_venda)
 
             document.getElementById('lucro_prejuizo-venda').textContent =
-                (response.valor_venda - response.valor_compra).toFixed(2)
+                new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  }).format(response.valor_venda - response.valor_compra)
+
             if(response.valor_venda - response.valor_compra > 0) {
                 comissao = 0.1 * (response.valor_venda - response.valor_compra)
             }else{
                 comissao = 0
             }
             document.getElementById('comissao-venda').textContent =
-                (comissao).toFixed(2)
+                new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  }).format(comissao)
         },
         dataType: 'json'
     });

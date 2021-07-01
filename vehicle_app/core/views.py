@@ -1,5 +1,6 @@
 import datetime
 
+from babel.numbers import format_currency
 from api.serializers import VehicleSerializer
 from api.views import get_profits_info
 from core.models import Vehicle
@@ -22,6 +23,9 @@ def dashboard(request):
         else:
             vehicle['status'] = 'Disponível'
 
+        vehicle['valor_compra'] = format_currency(vehicle['valor_compra'],
+                                                    'BRL', locale='pt_BR')
+
     ultimas_vendas = Vehicle.objects.all().filter(
         data_venda__isnull=False).order_by('-data_venda')
 
@@ -35,6 +39,15 @@ def dashboard(request):
                 vehicle['lucro_prejuizo']))
         else:
             vehicle['comissao'] = "{:.2f}".format(0)
+
+        vehicle['comissao'] = format_currency(vehicle['comissao'], 'BRL',
+                                               locale='pt_BR')
+        vehicle['lucro_prejuizo'] = format_currency(vehicle['lucro_prejuizo'],
+                                                    'BRL', locale='pt_BR')
+        vehicle['valor_venda'] = format_currency(vehicle['valor_venda'],
+                                                    'BRL', locale='pt_BR')
+        vehicle['valor_compra'] = format_currency(vehicle['valor_compra'],
+                                                    'BRL', locale='pt_BR')
     if len(ultimas_vendas) > 5:
         ultimas_vendas = ultimas_vendas[0:5]
 
@@ -50,6 +63,11 @@ def veiculos(request):
     available_vehicles = Vehicle.objects.all().filter(data_venda__isnull=True)
     serializer = VehicleSerializer(available_vehicles, many=True)
     available_vehicles = serializer.data
+    for vehicle in available_vehicles:
+
+        vehicle['valor_compra'] = format_currency(float(vehicle[
+                                                            'valor_compra']),
+                                                    'BRL', locale='pt_BR')
 
     return render(request, 'veiculos.html', {
         'available_vehicles': available_vehicles,
@@ -71,6 +89,13 @@ def vendas(request):
         else:
             vehicle['comissao'] = 0
 
-        vehicle['comissao'] = "{:.2f}".format(vehicle['comissao'])
+        vehicle['comissao'] = format_currency(vehicle['comissao'], 'BRL',
+                                               locale='pt_BR')
+        vehicle['lucro_prejuizo'] = format_currency(vehicle['lucro_prejuizo'],
+                                                    'BRL', locale='pt_BR')
+        vehicle['valor_venda'] = format_currency(vehicle['valor_venda'],
+                                                    'BRL', locale='pt_BR')
+        vehicle['valor_compra'] = format_currency(vehicle['valor_compra'],
+                                                    'BRL', locale='pt_BR')
     return render(request, 'vendas.html', {'vehicles': vehicles,
                                            'year_options': year_options})
