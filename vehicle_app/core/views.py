@@ -10,8 +10,8 @@ PORCENTAGEM_COMISSAO = 0.1
 
 def dashboard(request):
     """Render 'Dashboard' page"""
-    last_month = int(request.GET.get('last_month', 0)) == 1
-    profits_info = get_profits_info(last_month)
+    interval = request.GET.get('interval', 'begin')
+    profits_info = get_profits_info(interval)
 
     all_vehicles = Vehicle.objects.all()
     serializer = VehicleSerializer(all_vehicles, many=True)

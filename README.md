@@ -27,7 +27,11 @@ O servidor estará acessível em: [http://localhost:8000](http://localhost:8000)
 
 A solução proposta foi uma aplicação web construída usando Django e o Django Rest Framework. O Django faz a renderização dos templates e a API fornece uma interface de acesso ao banco de dados.
 
-* Tela Dashboard: Nessa tela é apresentado um resumo das informações de vendas, compras, lucro, comissões. Além disso, todos os veículos (disponíveis para venda ou não) são listados. As informações de lucro podem ser filtradas de acordo 
+* Tela Dashboard: Nessa tela é apresentado um resumo das informações de 
+  vendas, compras, lucro, comissões. Além disso, todos os veículos 
+  (disponíveis para venda ou não) são listados. As informações de lucro 
+  podem ser filtradas de acordo com intervalos de tempo (última semana, 
+  último mês, último semestre e desde o início).
 ![image](https://user-images.githubusercontent.com/52494917/124048288-5c5c6380-d9ec-11eb-91c1-067b665b1f1e.png)
 
 * Tela Veículos: Tela responsável por listar os veículos disponíveis para venda, bem como adição de um novo veículo (nova compra), remoção, edição e realização de uma venda.

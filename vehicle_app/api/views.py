@@ -17,15 +17,23 @@ class VehicleViewset(viewsets.ModelViewSet):
     queryset = Vehicle.objects.all()
 
 
-def get_profits_info(last_month=False):
-    last_month_date = datetime.datetime.today() - timedelta(days=30)
+def get_profits_info(interval='begin'):
 
-    if last_month:
+    if interval == 'month':
+        begin_date = datetime.datetime.today() - timedelta(days=30)
+    elif interval == 'week':
+        begin_date = datetime.datetime.today() - timedelta(days=7)
+    elif interval == 'semester':
+        begin_date = datetime.datetime.today() - timedelta(days=180)
+    else:
+        interval = 'begin'
+
+    if interval != 'begin':
         compras = Vehicle.objects.all().filter(
-            data_compra__gte=last_month_date)
+            data_compra__gte=begin_date)
         vendas = Vehicle.objects.all().filter(
             data_venda__isnull=False).filter(
-            data_venda__gte=last_month_date)
+            data_venda__gte=begin_date)
     else:
         compras = Vehicle.objects.all()
         vendas = Vehicle.objects.all().filter(data_venda__isnull=False)
@@ -74,6 +82,6 @@ class ProfitsInfo(APIView):
 
     def get(self, request):
         """Return the profits info (sales, profits, purchases)"""
-        last_month = int(request.query_params.get('last_month', 0)) == 1
-        profits_info = get_profits_info(last_month)
+        interval = request.query_params.get('interval', 'begin')
+        profits_info = get_profits_info(interval)
         return Response(profits_info)

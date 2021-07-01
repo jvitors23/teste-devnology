@@ -1,8 +1,8 @@
 function updateDashboard(){
-    last_month = document.querySelector("#time-interval").value
+    interval = document.querySelector("#time-interval").value
     $.ajax({
         type: "GET",
-        url: '/api/profits?last_month='+last_month,
+        url: '/api/profits?interval='+interval,
         success: function(response){
             document.getElementById('total_compras').textContent = response.total_compras
             document.getElementById('total_vendas').textContent = response.total_vendas
