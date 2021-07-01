@@ -14,9 +14,11 @@ class VehicleSerializer(serializers.ModelSerializer):
     chassi = serializers.CharField(max_length=255)
     ano_fabricacao = serializers.ChoiceField(choices=list(range(
         1940, datetime.date.today().year + 1)))
-    valor_compra = serializers.DecimalField(max_digits=8, decimal_places=2)
+    valor_compra = serializers.DecimalField(max_digits=8, decimal_places=2,
+                                            min_value=0)
     valor_venda = serializers.DecimalField(max_digits=8, decimal_places=2,
-                                           allow_null=True, required=False)
+                                           allow_null=True, required=False,
+                                           min_value=0)
     data_compra = serializers.DateField(format="%d/%m/%Y")
     data_venda = serializers.DateField(format="%d/%m/%Y", required=False,
                                        allow_null=True)
