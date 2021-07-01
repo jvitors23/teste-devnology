@@ -48,13 +48,13 @@ A solução proposta foi uma aplicação web construída usando Django e o Djang
   (disponíveis para venda ou não) são listados. As informações de lucro 
   podem ser filtradas de acordo com intervalos de tempo (última semana, 
   último mês, último semestre e desde o início).
-![image](https://user-images.githubusercontent.com/52494917/124048288-5c5c6380-d9ec-11eb-91c1-067b665b1f1e.png)
+![image](https://user-images.githubusercontent.com/52494917/124056732-a4838200-d9fc-11eb-9db3-adaebf4025c1.png)
 
 * Tela Veículos: Tela responsável por listar os veículos disponíveis para venda, bem como adição de um novo veículo (nova compra), remoção, edição e realização de uma venda.
-![image](https://user-images.githubusercontent.com/52494917/124048623-210e6480-d9ed-11eb-84fe-2d8289b5a7a5.png)
+![image](https://user-images.githubusercontent.com/52494917/124056750-ae0cea00-d9fc-11eb-9794-8a856af830f3.png)
 
 * Tela Vendas: Apresenta o histórico de vendas, o usuário pode alterar os dados de uma venda, visualizar detalhes e cancelar uma venda. Ao cancelar uma venda o veículo volta para tela de veículos disponíveis.
-![image](https://user-images.githubusercontent.com/52494917/124049116-2d46f180-d9ee-11eb-8297-8f82e304903b.png)
+![image](https://user-images.githubusercontent.com/52494917/124056786-be24c980-d9fc-11eb-8d53-54d0c54e873d.png)
 
 ## API
 * Endpoint para consultar veículos (GET)```/api/vehicles```
