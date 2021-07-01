@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 
-router.register('veiculos', views.VehicleViewset)
+router.register('vehicles', views.VehicleViewset)
 
 app_name = 'api'
 

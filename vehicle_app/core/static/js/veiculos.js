@@ -18,7 +18,7 @@ $(document).ready(function() {
         if(modal_mode == 'create'){
             $.ajax({
                 type: "POST",
-                url: '/api/veiculos/',
+                url: '/api/vehicles/',
                 data: data,
                 success: function (response) {
                     document.location.reload(true);
@@ -31,7 +31,7 @@ $(document).ready(function() {
         }else{
             $.ajax({
                 type: "PUT",
-                url: '/api/veiculos/'+update_id_vehicle+'/',
+                url: '/api/vehicles/'+update_id_vehicle+'/',
                 data: data,
                 success: function (response) {
                     document.location.reload(true);
@@ -54,7 +54,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "PATCH",
-            url: '/api/veiculos/'+update_id_vehicle+'/',
+            url: '/api/vehicles/'+update_id_vehicle+'/',
             data: data,
             success: function (response) {
                 document.location.reload(true);
@@ -73,7 +73,7 @@ $(document).ready(function() {
 function deleteVehicle(id_vehicle){
       $.ajax({
           type: "DELETE",
-          url: '/api/veiculos/'+id_vehicle,
+          url: '/api/vehicles/'+id_vehicle,
           success: function(response){
             document.location.reload(true);
           },
@@ -92,7 +92,7 @@ function updateModal(id_vehicle){
 
     $.ajax({
         type: "GET",
-        url: '/api/veiculos/'+id_vehicle,
+        url: '/api/vehicles/'+id_vehicle,
         success: function(response){
             document.getElementById('modelo').value = response.modelo
             document.getElementById('marca').value = response.marca
@@ -112,7 +112,7 @@ function openModalVenda(id_vehicle){
     update_id_vehicle = id_vehicle
     $.ajax({
         type: "GET",
-        url: '/api/veiculos/'+id_vehicle,
+        url: '/api/vehicles/'+id_vehicle,
         success: function(response){
             document.getElementById('modelo-venda').textContent = response.modelo
             document.getElementById('marca-venda').textContent = response.marca

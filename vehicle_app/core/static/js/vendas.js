@@ -1,9 +1,7 @@
-
-
 function sellDetails(id_vehicle){
     $.ajax({
         type: "GET",
-        url: '/api/veiculos/'+id_vehicle,
+        url: '/api/vehicles/'+id_vehicle,
         success: function(response){
             document.getElementById('modelo-venda').textContent = response.modelo
             document.getElementById('marca-venda').textContent = response.marca
@@ -50,7 +48,7 @@ function cancelSell(id_vehicle){
 
         $.ajax({
             type: "PATCH",
-            url: '/api/veiculos/'+id_vehicle+'/',
+            url: '/api/vehicles/'+id_vehicle+'/',
             data: data,
             success: function (response) {
                 console.log(response.status)
@@ -83,7 +81,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "PUT",
-            url: '/api/veiculos/'+update_id_vehicle+'/',
+            url: '/api/vehicles/'+update_id_vehicle+'/',
             data: data,
             success: function (response) {
                 document.location.reload(true);
@@ -103,7 +101,7 @@ function updateModal(id_vehicle){
 
     $.ajax({
         type: "GET",
-        url: '/api/veiculos/'+id_vehicle,
+        url: '/api/vehicles/'+id_vehicle,
         success: function(response){
             document.getElementById('modelo').value = response.modelo
             document.getElementById('marca').value = response.marca

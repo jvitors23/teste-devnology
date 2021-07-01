@@ -70,5 +70,7 @@ def vendas(request):
                                   PORCENTAGEM_COMISSAO
         else:
             vehicle['comissao'] = 0
+
+        vehicle['comissao'] = "{:.2f}".format(vehicle['comissao'])
     return render(request, 'vendas.html', {'vehicles': vehicles,
                                            'year_options': year_options})
